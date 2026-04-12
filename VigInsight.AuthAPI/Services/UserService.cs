@@ -28,12 +28,6 @@ namespace VigInsight.AuthAPI.Services
             return userId;
         }
 
-        public async Task<int> AddUserAsync(UserModel user)
-        {
-            // For backward compatibility, call the new method with a default orgId (or throw)
-            return await AddUserAsync(user, 0); // 0 or throw new NotImplementedException();
-        }
-
         public async Task<IEnumerable<UserModel>> GetAllUsersAsync()
         {
             return await _userRepository.GetAllUsersAsync();
