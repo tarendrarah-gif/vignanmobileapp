@@ -97,6 +97,9 @@
     <Build Include="dbo\Stored Procedures\usp_GetOrganizationsByUser.sql" />
     <Build Include="dbo\Stored Procedures\usp_GetUsersByOrganization.sql" />
     <Build Include="dbo\Stored Procedures\usp_InsertMachineOrganization.sql" />
+    <Build Include="dbo\Stored Procedures\usp_GetPage2Data.sql" />
+    <Build Include="dbo\Tables\tblPage2.sql" />
+    <Build Include="SeedData_tblPage2.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="VignanInsightDB.publish.xml" />
