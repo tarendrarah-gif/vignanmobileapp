@@ -190,7 +190,7 @@
                                         <div id="addMachineError" class="alert alert-danger d-none mt-2" role="alert">
                                             Error adding machine. Please check the form and try again.
                                         </div>
-                                        <div id="addMachineSuccess" class="alert alert-success d-none mt-2" role="alert">
+                                        <div id="addMachineSuccess" class="alert alert-success d-none mt-2" role="alert" style="transition: opacity 0.8s ease;">
                                             Machine added successfully!
                                         </div>
                                     </div>
@@ -294,8 +294,19 @@ document.getElementById('addMachineForm').addEventListener('submit', async funct
             body: JSON.stringify(request)
         });
         if (response.ok) {
-            document.getElementById('addMachineSuccess').classList.remove('d-none');
+            const successEl = document.getElementById('addMachineSuccess');
+            successEl.style.opacity = '1';
+            successEl.classList.remove('d-none');
             document.getElementById('addMachineForm').reset();
+
+            // Fade out after 3 seconds, then fully hide after transition
+            setTimeout(() => {
+                successEl.style.opacity = '0';
+                setTimeout(() => {
+                    successEl.classList.add('d-none');
+                    successEl.style.opacity = '1'; // reset for next submission
+                }, 800); // matches the 0.8s CSS transition
+            }, 3000);
         } else {
             const errorText = await response.text();
             document.getElementById('addMachineError').textContent = errorText || 'Error adding machine. Please check the form and try again.';

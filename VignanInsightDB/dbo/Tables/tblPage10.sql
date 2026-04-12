@@ -1,0 +1,27 @@
+﻿CREATE TABLE [dbo].[tblPage10] (
+    [DataId]             INT           IDENTITY (1, 1) NOT NULL,
+    [PresentStage]       NVARCHAR (50) NULL,
+    [StageTime]          NVARCHAR (50) NULL,
+    [CoreSelection]      NVARCHAR (50) NULL,
+    [CoreSequence]       NVARCHAR (50) NULL,
+    [ONDelayCoreIn]      NVARCHAR (50) NULL,
+    [ONDelayCoreOut]     NVARCHAR (50) NULL,
+    [OperationBasedOn]   NVARCHAR (50) NULL,
+    [FlowCoreIn]         NVARCHAR (50) NULL,
+    [FlowCoreOut]        NVARCHAR (50) NULL,
+    [SolDuringInjection] NVARCHAR (50) NULL,
+    [PressureCoreIn]     NVARCHAR (50) NULL,
+    [PressureCoreOut]    NVARCHAR (50) NULL,
+    [InSolHold]          NVARCHAR (50) NULL,
+    [PositionCoreIn]     NVARCHAR (50) NULL,
+    [PositionCoreOut]    NVARCHAR (50) NULL,
+    [OutSolHold]         NVARCHAR (50) NULL,
+    [TimeCoreIn]         NVARCHAR (50) NULL,
+    [TimeCoreOut]        NVARCHAR (50) NULL,
+    [InDigitalOutput]    NVARCHAR (50) NULL,
+    [OutDigitalOutput]   NVARCHAR (50) NULL,
+    [CreatedOn]          DATETIME      DEFAULT (getdate()) NULL,
+    [IsActive]           BIT           DEFAULT ((1)) NULL,
+    PRIMARY KEY CLUSTERED ([DataId] ASC)
+);
+

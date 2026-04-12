@@ -1,0 +1,25 @@
+﻿CREATE TABLE [dbo].[tblPage_10] (
+    [DataId]     INT           IDENTITY (1, 1) NOT NULL,
+    [Clap]       NVARCHAR (50) NULL,
+    [Screw]      NVARCHAR (50) NULL,
+    [Eject]      NVARCHAR (50) NULL,
+    [Carri]      NVARCHAR (50) NULL,
+    [BatchCount] NVARCHAR (50) NULL,
+    [DigInput03] NVARCHAR (10) NULL,
+    [DigInput05] NVARCHAR (10) NULL,
+    [DigInput11] NVARCHAR (10) NULL,
+    [DigInput12] NVARCHAR (10) NULL,
+    [DigInput21] NVARCHAR (10) NULL,
+    [DigInput24] NVARCHAR (10) NULL,
+    [DigInput25] NVARCHAR (10) NULL,
+    [DigInput26] NVARCHAR (10) NULL,
+    [DigInput27] NVARCHAR (10) NULL,
+    [DigInput28] NVARCHAR (10) NULL,
+    [DigInput29] NVARCHAR (10) NULL,
+    [DigInput30] NVARCHAR (10) NULL,
+    [DigInput31] NVARCHAR (10) NULL,
+    [CreatedOn]  DATETIME      DEFAULT (getdate()) NULL,
+    [IsActive]   BIT           NULL,
+    PRIMARY KEY CLUSTERED ([DataId] ASC)
+);
+

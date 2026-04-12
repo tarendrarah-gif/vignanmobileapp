@@ -1,0 +1,25 @@
+﻿CREATE TABLE [dbo].[tblPage26] (
+    [DataId]                  INT            IDENTITY (1, 1) NOT NULL,
+    [AutoDieLockingSelection] NVARCHAR (100) NULL,
+    [AdjustBy]                NVARCHAR (100) NULL,
+    [AdjustTime]              NVARCHAR (50)  NULL,
+    [StandStillTime]          NVARCHAR (50)  NULL,
+    [FlowMovement]            NVARCHAR (50)  NULL,
+    [FlowCounting]            NVARCHAR (50)  NULL,
+    [PressureMovement]        NVARCHAR (50)  NULL,
+    [PressureCounting]        NVARCHAR (50)  NULL,
+    [NumberOfTrials]          NVARCHAR (50)  NULL,
+    [RequiredLockingPressure] NVARCHAR (50)  NULL,
+    [ExecutedTrials]          NVARCHAR (50)  NULL,
+    [RequiredPulseCount]      NVARCHAR (50)  NULL,
+    [DirectionOfRotation]     NVARCHAR (50)  NULL,
+    [ActualPulseCount]        NVARCHAR (50)  NULL,
+    [MachineLockingFactor]    NVARCHAR (50)  NULL,
+    [PresentTrialCount]       NVARCHAR (50)  NULL,
+    [ActualClampPressure]     NVARCHAR (50)  NULL,
+    [ActualClampPosition]     NVARCHAR (50)  NULL,
+    [CreatedOn]               DATETIME       NULL,
+    [IsActive]                BIT            NULL,
+    PRIMARY KEY CLUSTERED ([DataId] ASC)
+);
+

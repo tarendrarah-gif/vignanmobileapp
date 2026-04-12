@@ -50,7 +50,7 @@
                     <li class="menu-item">
                         <a href="AddUser.html" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-user-plus"></i>
-                            <div data-i18n="Analytics">Add New User</div>
+                            <div data-i18n="Analytics">Add User</div>
                         </a>
                     </li>
                     <li class="menu-item">
@@ -190,7 +190,7 @@
                                         <div id="addOrgError" class="alert alert-danger d-none mt-2" role="alert">
                                             Error adding organization. Please check the form and try again.
                                         </div>
-                                        <div id="addOrgSuccess" class="alert alert-success d-none mt-2" role="alert">
+                                        <div id="addOrgSuccess" class="alert alert-success d-none mt-2" role="alert" style="transition: opacity 0.8s ease;">
                                             Organization added successfully!
                                         </div>
                                     </div>
@@ -204,7 +204,7 @@
                 <footer class="content-footer footer bg-footer-theme">
                     <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
                         <div class="mb-2 mb-md-0">
-                            ©
+                            ï¿½
                             <script>
                                 document.write(new Date().getFullYear());
                             </script>
@@ -264,8 +264,19 @@
                 body: JSON.stringify(org)
             });
             if (response.ok) {
-                document.getElementById('addOrgSuccess').classList.remove('d-none');
+                const successEl = document.getElementById('addOrgSuccess');
+                successEl.style.opacity = '1';
+                successEl.classList.remove('d-none');
                 document.getElementById('addOrgForm').reset();
+
+                // Fade out after 3 seconds, then fully hide after transition
+                setTimeout(() => {
+                    successEl.style.opacity = '0';
+                    setTimeout(() => {
+                        successEl.classList.add('d-none');
+                        successEl.style.opacity = '1'; // reset for next submission
+                    }, 800); // matches the 0.8s CSS transition
+                }, 3000);
             } else {
                 const errorText = await response.text();
                 document.getElementById('addOrgError').textContent = errorText || 'Error adding organization. Please check the form and try again.';
