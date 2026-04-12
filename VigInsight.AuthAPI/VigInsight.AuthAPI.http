@@ -1,0 +1,6 @@
+@VigInsight.AuthAPI_HostAddress = http://localhost:5261
+
+GET {{VigInsight.AuthAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

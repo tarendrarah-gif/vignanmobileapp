@@ -1,0 +1,18 @@
+/* Sticky navbar for all pages */
+#layout-navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1050; /* Above content, below modals */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.layout-page > #layout-navbar {
+    margin-bottom: 0;
+}
+
+/* Ensure parent containers do not break sticky positioning */
+.layout-wrapper,
+.layout-container,
+.layout-page,
+.content-wrapper {
+    overflow: visible !important;
+}

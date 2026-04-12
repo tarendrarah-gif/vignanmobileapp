@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+    <title>Login | Vignan</title>
+    <meta name="description" content="Login page for Vignan" />
+    <link rel="icon" type="image/x-icon" href="./assets/img/favicon/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./assets/vendor/fonts/boxicons.css" />
+    <link rel="stylesheet" href="./assets/vendor/css/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="./assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="./assets/css/demo.css" />
+    <link rel="stylesheet" href="./assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <style>
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f5f5f9;
+        }
+        .login-card {
+            max-width: 400px;
+            width: 100%;
+            margin: 2rem auto;
+            border-radius: 1rem;
+            box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.05);
+            background: #fff;
+            padding: 2rem 2rem 1.5rem 2rem;
+        }
+        .login-logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        .login-logo img {
+            max-width: 80px;
+            margin-bottom: 0.5rem;
+        }
+        @media (max-width: 576px) {
+            .login-card {
+                padding: 1.5rem 1rem 1rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-card">
+        <div class="login-logo">
+            <img src="./assets/img/favicon/vignan.png" alt="Vignan Logo" />
+            <span class="app-brand-text fw-bolder" style="font-size: 1.5rem;">Vignan</span>
+        </div>
+        <h4 class="mb-2 text-center">Sign in to your account</h4>
+        <form id="loginForm" autocomplete="off">
+            <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control" id="username" name="username" required autofocus />
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <div style="position: relative;">
+                    <input type="password" class="form-control" id="password" name="password" required />
+                    <span id="togglePassword" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">
+                        <i class="bx bx-show" id="eyeIcon"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="mb-3 d-flex justify-content-between align-items-center">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="rememberMe" />
+                    <label class="form-check-label" for="rememberMe">Remember me</label>
+                </div>
+                <a href="#" class="small">Forgot password?</a>
+            </div>
+            <div class="d-grid mb-3">
+                <button type="submit" class="btn btn-primary">Sign In</button>
+            </div>
+        </form>
+        <div id="loginError" class="alert alert-danger d-none mt-2" role="alert">
+            Invalid username or password.
+        </div>
+    </div>
+    <script src="./assets/vendor/libs/jquery/jquery.js"></script>
+    <script src="./assets/vendor/js/bootstrap.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script>
+        const ENCRYPTION_KEY = 'VigInsightSecretKey123'; // For demo only, use a secure key in production
+
+        // Remember Me: Pre-fill username and password if saved
+        window.addEventListener('DOMContentLoaded', function() {
+            var encryptedCreds = localStorage.getItem('rememberedCreds');
+            if (encryptedCreds) {
+                try {
+                    var bytes = CryptoJS.AES.decrypt(encryptedCreds, ENCRYPTION_KEY);
+                    var decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+                    document.getElementById('username').value = decryptedData.username || '';
+                    document.getElementById('password').value = decryptedData.password || '';
+                    document.getElementById('rememberMe').checked = true;
+                } catch (e) {
+                    // If decryption fails, clear localStorage and allow manual login
+                    localStorage.removeItem('rememberedCreds');
+                    document.getElementById('username').value = '';
+                    document.getElementById('password').value = '';
+                    document.getElementById('rememberMe').checked = false;
+                    // Login form remains usable
+                }
+            }
+        });
+
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            document.getElementById('loginError').classList.add('d-none');
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+            var rememberMe = document.getElementById('rememberMe').checked;
+            try {
+                const response = await fetch('https://localhost:7039/api/Login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ Username: username, Password: password })
+                });
+                if (response.ok) {
+                    const data = await response.json();
+                    localStorage.setItem('user', JSON.stringify(data));
+                    // Remember Me logic with encryption
+                    if (rememberMe) {
+                        var creds = { username: username, password: password };
+                        var encrypted = CryptoJS.AES.encrypt(JSON.stringify(creds), ENCRYPTION_KEY).toString();
+                        localStorage.setItem('rememberedCreds', encrypted);
+                    } else {
+                        localStorage.removeItem('rememberedCreds');
+                    }
+                    if (data.role && data.role.toLowerCase() === 'admin') {
+                        window.location.href = 'AdminDashboard.html';
+                    } else {
+                        window.location.href = 'ClientDashboard.html';
+                    }
+                } else {
+                    document.getElementById('loginError').classList.remove('d-none');
+                }
+            } catch (err) {
+                document.getElementById('loginError').classList.remove('d-none');
+            }
+        });
+
+        document.getElementById('togglePassword').addEventListener('click', function () {
+            var passwordInput = document.getElementById('password');
+            var eyeIcon = document.getElementById('eyeIcon');
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                eyeIcon.classList.remove('bx-show');
+                eyeIcon.classList.add('bx-hide');
+            } else {
+                passwordInput.type = 'password';
+                eyeIcon.classList.remove('bx-hide');
+                eyeIcon.classList.add('bx-show');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en" class="light-style layout-menu-fixed" dir="ltr" data-theme="theme-default" data-assets-path="./assets/" data-template="vertical-menu-template-free">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+    <title>Cycle Overview - Page 2</title>
+    <meta name="description" content="" />
+    <link rel="icon" type="image/x-icon" href="./assets/img/favicon/favicon.ico" />
+    <link rel="stylesheet" href="./assets/vendor/fonts/boxicons.css" />
+    <link rel="stylesheet" href="./assets/vendor/css/core.css" />
+    <link rel="stylesheet" href="./assets/vendor/css/theme-default.css" />
+    <link rel="stylesheet" href="./assets/css/demo.css" />
+    <link rel="stylesheet" href="./assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="./assets/vendor/libs/apex-charts/apex-charts.css" />
+    <style>
+        .cycle-table th, .cycle-table td {
+            padding: 0.3rem 0.5rem;
+            font-size: 0.95rem;
+        }
+        .cycle-table th {
+            background: #eaf6fa;
+            font-weight: 600;
+        }
+        .cycle-table td {
+            background: #fff;
+        }
+        .cycle-graph {
+            background: #fff;
+            border: 2px solid #3bb3e0;
+            border-radius: 8px;
+            min-height: 260px;
+            height: 100%;
+            margin-bottom: 0.5rem;
+        }
+        .cycle-time-scale {
+            background: #f7f7c0;
+            border-radius: 0 0 8px 8px;
+            padding: 0.3rem 0.5rem;
+            font-size: 0.95rem;
+            text-align: center;
+        }
+        .status-bar {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #0074d9;
+        }
+        .status-bar .machine-status {
+            color: #ff4136;
+        }
+        .status-bar .stage {
+            color: #ff4136;
+        }
+        .right-panel th, .right-panel td {
+            padding: 0.2rem 0.5rem;
+            font-size: 0.95rem;
+        }
+        .right-panel th {
+            background: #eaf6fa;
+            font-weight: 600;
+        }
+        .right-panel td {
+            background: #fff;
+        }
+        @media (max-width: 900px) {
+            .cycle-graph {
+                min-height: 180px;
+            }
+        }
+        @media (max-width: 600px) {
+            .cycle-table th, .cycle-table td, .right-panel th, .right-panel td {
+                font-size: 0.85rem;
+                padding: 0.2rem 0.3rem;
+            }
+            .cycle-graph {
+                min-height: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="layout-wrapper layout-content-navbar">
+        <div class="layout-container">
+            <!-- Sidebar Navigation (copied from Page3.html) -->
+            <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+                <div class="app-brand demo">
+                    <a href="index.html" class="app-brand-link">
+                        <img src="./assets/img/favicon/vignan.png" alt="Logo" style="max-width: 80px;" />
+                        <span class="app-brand-text demo menu-text fw-bolder">Vignan</span>
+                    </a>
+                    <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+                        <i class="bx bx-chevron-left bx-sm align-middle"></i>
+                    </a>
+                </div>
+                <div class="menu-inner-shadow"></div>
+
+                <ul class="menu-inner py-1">
+
+                    <li class="menu-item active">
+                        <a href="MachineOverview.html" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                            <div data-i18n="Analytics">Home page</div>
+                        </a>
+                    </li>
+
+                    <li class="menu-item">
+                        <a href="Page2.html" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-collection"></i>
+                            <div data-i18n="Analytics">Page2</div>
+                        </a>
+                    </li>
+
+                    <li class="menu-item">
+                        <a href="Page3.html" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-collection"></i>
+                            <div data-i18n="Analytics">3 (Mold close)</div>
+                        </a>
+                    </li>
+
+                    <li class="menu-item">
+                        <a href="Page5.html" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-collection"></i>
+                            <div data-i18n="Analytics">5 (Mold open)</div>
+                        </a>
+                    </li>
+
+                    <li class="menu-item">
+                        <a href="Page7.html" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-collection"></i>
+                            <div data-i18n="Analytics">7 (Hydro. Ejector)</div>
+                        </a>
+                    </li>
+
+                    <li class="menu-item">
+                        <a href="Page10.html" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-collection"></i>
+                            <div data-i18n="Analytics">10 (Core1)</div>
+                        </a>
+                    </li>
+
+                    <li class="menu-item">
+                        <a href="Page15.html" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-collection"></i>
+                            <div data-i18n="Analytics">15 (Injection)</div>
+                        </a>
+                    </li>
+
+                    <li class="menu-item">
+                        <a href="Page18.html" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-collection"></i>
+                            <div data-i18n="Analytics">18 (Refill & suckback)</div>
+                        </a>
+                    </li>
+
+                    <li class="menu-item">
+                        <a href="Page21.html" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-collection"></i>
+                            <div data-i18n="Analytics">21 (Temp. Settings)</div>
+                        </a>
+                    </li>
+
+                    <li class="menu-item">
+                        <a href="Page29.html" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-collection"></i>
+                            <div data-i18n="Analytics">29(Timer settings)</div>
+                        </a>
+                    </li>
+
+                    <li class="menu-item" style="display:none">
+                        <a href="Page20.html" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-collection"></i>
+                            <div data-i18n="Analytics">20 (Carriage)</div>
+                        </a>
+                    </li>
+
+                    <li class="menu-item" style="display:none">
+                        <a href="Page14.html" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-collection"></i>
+                            <div data-i18n="Analytics">14 (Air Ejector)</div>
+                        </a>
+                    </li>
+
+
+                    <li class="menu-item" style="display:none">
+                        <a href="Page11.html" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-collection"></i>
+                            <div data-i18n="Analytics">11 (Core2)</div>
+                        </a>
+                    </li>
+                    <li class="menu-item" style="display:none">
+                        <a href="Page26.html" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-collection"></i>
+                            <div data-i18n="Analytics">26 (Mold Height)</div>
+                        </a>
+                    </li>
+                    <li class="menu-item" style="display:none">
+                        <a href="Page44.html" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-collection"></i>
+                            <div data-i18n="Analytics">44 (Analog Calibration)</div>
+                        </a>
+                    </li>
+                    <li class="menu-item" style="display:none">
+                        <a href="Page32.html" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-collection"></i>
+                            <div data-i18n="Analytics">32 (Motor Settings)</div>
+                        </a>
+                    </li>
+
+                    <li class="menu-item" style="display:none">
+                        <a href="Page53.html" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-collection"></i>
+                            <div data-i18n="Analytics">53 (Maximum Value1)</div>
+                        </a>
+                    </li>
+                    <li class="menu-item" style="display:none">
+                        <a href="Page34.html" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-collection"></i>
+                            <div data-i18n="Analytics">34 (Lubrication Page)</div>
+                        </a>
+                    </li>
+
+                </ul>
+
+
+            </aside>
+            <!-- / Sidebar -->
+            <div class="layout-page">
+                <!-- Navbar (copied from Page3.html) -->
+                <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
+                    <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+                        <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+                            <i class="bx bx-menu bx-sm"></i>
+                        </a>
+                    </div>
+                    <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+                        <div class="navbar-nav align-items-center">
+                            <div class="nav-item d-flex align-items-center">
+                                <i class="bx bx-search fs-4 lh-0"></i>
+                                <input type="text" class="form-control border-0 shadow-none" placeholder="Search..." aria-label="Search..." />
+                            </div>
+                        </div>
+                        <ul class="navbar-nav flex-row align-items-center ms-auto">
+                            <li class="nav-item navbar-dropdown dropdown-user dropdown">
+                                <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+                                    <div class="avatar avatar-online">
+                                        <img src="./assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                                    </div>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li>
+                                        <a class="dropdown-item" href="#">
+                                            <div class="d-flex">
+                                                <div class="flex-shrink-0 me-3">
+                                                    <div class="avatar avatar-online">
+                                                        <img src="./assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                                                    </div>
+                                                </div>
+                                                <div class="flex-grow-1">
+                                                    <span class="fw-semibold d-block">John Doe</span>
+                                                    <small class="text-muted">Admin</small>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li><div class="dropdown-divider"></div></li>
+                                    <li><a class="dropdown-item" href="#"><i class="bx bx-user me-2"></i><span class="align-middle">My Profile</span></a></li>
+                                    <li><a class="dropdown-item" href="#"><i class="bx bx-cog me-2"></i><span class="align-middle">Settings</span></a></li>
+                                    <li><a class="dropdown-item" href="#"><span class="d-flex align-items-center align-middle"><i class="flex-shrink-0 bx bx-credit-card me-2"></i><span class="flex-grow-1 align-middle">Billing</span><span class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span></span></a></li>
+                                    <li><div class="dropdown-divider"></div></li>
+                                    <li><a class="dropdown-item" href="index.html"><i class="bx bx-power-off me-2"></i><span class="align-middle">Log Out</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                <!-- / Navbar -->
+                <div class="content-wrapper">
+                    <div class="container-xxl flex-grow-1 container-p-y">
+                        <div class="row">
+                            <div class="col-lg-12 mb-4 order-0">
+                                <div class="card">
+                                    <div class="card-body" style="background-color: #c9f1f3;">
+                                        <div class="row">
+                                            <div class="col-12 status-bar">
+                                                <span class="text-primary">GANESH1</span>
+                                                <span class="machine-status">HAND</span>
+                                                &nbsp;Hourly Prod:<span class="text-danger">000</span>
+                                                &nbsp;Mold Cls <span class="text-danger">000</span>
+                                                &nbsp;Injection <span class="text-danger">000.00sec</span>
+                                                &nbsp;Refill <span>000.00sec</span>
+                                                &nbsp;Cooling <span class="text-primary">000.00sec</span>
+                                                &nbsp;Total Cycle <span class="text-danger">000.00sec</span>
+                                                &nbsp;OEM Level: <span>4</span>
+                                                &nbsp;<span style="float:right;">26-07-2025 Sat 17:04:31</span>
+                                            </div>
+                                            <div class="col-12 mt-1">
+                                                <span>Flag: <span class="text-danger">00</span></span>
+                                                &nbsp;Stage: <span class="stage">Idle</span>
+                                                &nbsp;Flow: 00.0% Press: <span class="text-danger">000bar</span> Pos: 0000.0mm Time: 000.00sec
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-lg-9 order-2 order-md-3 order-lg-2 mb-4">
+                                <div class="card h-100 equal-height" style="background-color: #eaf6fa;">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-12 col-md-4">
+                                                <table class="table cycle-table">
+                                                    <tbody>
+                                                        <tr><th>Mold Close</th><td>000.0</td></tr>
+                                                        <tr><th>Cores In</th><td>000.0</td></tr>
+                                                        <tr><th>Unit Fwd</th><td>000.0</td></tr>
+                                                        <tr><th>Intrugen</th><td>000.0</td></tr>
+                                                        <tr><th>Injection</th><td>000.0</td></tr>
+                                                        <tr><th>Hold On</th><td>000.0</td></tr>
+                                                        <tr><th>Refill</th><td>000.0</td></tr>
+                                                        <tr><th>Suckback</th><td>000.0</td></tr>
+                                                        <tr><th>Unit Ret</th><td>000.0</td></tr>
+                                                        <tr><th>Cooling</th><td>000.0</td></tr>
+                                                        <tr><th>Mold Open</th><td>000.0</td></tr>
+                                                        <tr><th>Cores Out</th><td>000.0</td></tr>
+                                                        <tr><th>Ejector Fwd</th><td>000.0</td></tr>
+                                                        <tr><th>Ejector Ret</th><td>000.0</td></tr>
+                                                        <tr><th>Cycle Delay</th><td>000.0</td></tr>
+                                                        <tr><th>Tot Cyc Time</th><td>000.0</td></tr>
+                                                    </tbody>
+                                                </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-8 col-lg-3 order-3 order-md-3">
+                                <div class="row">
+                                    <div class="col-12 mb-4">
+                                        <div class="card h-100 equal-height">
+                                            <div class="card-body right-panel" style="background-color: #eaf6fa;">
+                                                <table class="table">
+                                                    <tbody>
+                                                        <tr><th>CLAMP</th><td class="text-danger">0000.0 mm</td></tr>
+                                                        <tr><th>SCREW</th><td class="text-danger">000.0 mm</td></tr>
+                                                        <tr><th>EJECT</th><td class="text-primary">002.2 mm</td></tr>
+                                                        <tr><th>CARRI</th><td class="text-success">000.7 mm</td></tr>
+                                                        <tr><th>BATCH COUNT</th><td class="text-purple">00000</td></tr>
+                                                    </tbody>
+                                                </table>
+                                                <hr class="my-2" />
+                                                <div><strong>DIG.INPUTS STATUS:</strong></div>
+                                                <div style="font-size:0.9rem;">01 02 03 04 05 06 07 08<br>09 10 11 12 13 14 15 16<br>17 18 19 20 21 22 23 24</div>
+                                                <hr class="my-2" />
+                                                <div><strong>DIG.OUTPUTS STATUS</strong></div>
+                                                <div style="font-size:0.9rem;">--</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <footer class="content-footer footer bg-footer-theme">
+                        <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
+                            <div class="mb-2 mb-md-0">
+                                � <script>document.write(new Date().getFullYear());</script>, made by
+                                <a href="https://www.vignanelectronics.com/" target="_blank" class="footer-link fw-bolder">Vignan Electronics</a>
+                            </div>
+                        </div>
+                    </footer>
+                    <div class="content-backdrop fade"></div>
+                </div>
+            </div>
+        </div>
+        <div class="layout-overlay layout-menu-toggle"></div>
+    </div>
+    <script src="./assets/vendor/libs/jquery/jquery.js"></script>
+    <script src="./assets/vendor/libs/popper/popper.js"></script>
+    <script src="./assets/vendor/js/bootstrap.js"></script>
+    <script src="./assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="./assets/vendor/js/menu.js"></script>
+    <script src="./assets/vendor/libs/apex-charts/apexcharts.js"></script>
+    <script src="./assets/js/main.js"></script>
+    <script src="./assets/js/dashboards-analytics.js"></script>
+</body>
+</html>
