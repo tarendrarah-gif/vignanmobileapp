@@ -60,6 +60,7 @@ builder.Services.AddScoped<IUserOrganizationRepository, UserOrganizationReposito
 builder.Services.AddScoped<IUserOrganizationService, UserOrganizationService>();
 builder.Services.AddScoped<IMachineOrganizationRepository, MachineOrganizationRepository>();
 builder.Services.AddScoped<IMachineOrganizationService, MachineOrganizationService>();
+builder.Services.AddScoped<IPageDataService, PageDataRepository>();
 
 var app = builder.Build();
 

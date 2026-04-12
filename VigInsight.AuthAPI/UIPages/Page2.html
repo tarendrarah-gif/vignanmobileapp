@@ -392,9 +392,9 @@
                         <div class="row">
                             <div class="col-12 col-lg-9 order-2 order-md-3 order-lg-2 mb-4">
                                 <div class="card h-100 equal-height" style="background-color: #ffe1e073;">
-                                    <!--<div class="card-header">
-                                        <div class="row">
-                                            <div class="col-lg-12">
+                                    <!--<div class="card-header>
+                                        <div class="row>
+                                            <div class="col-lg-12>
                                                 <div class="col-lg-4" style="background-color: #9ea6a8;">
                                                     <h5 class="m-0">MOLD CLOSE DATA - 1</h5>
                                                 </div>
@@ -404,25 +404,24 @@
 
                                     <div class="card-body">
                                         <div class="table-responsive">
-                                            <table class="table table-bordered  text-center align-middle">
+                                            <table class="table table-bordered text-center align-middle" id="frmrtblpage2">
                                                 <tbody>
-                                                    <tr><td>Mold Close</td><td style="background-color: lightgreen;">000.0</td></tr>
-                                                    <tr><td>Cores In</td><td style="background-color: lightgreen;">000.0</td></tr>
-                                                    <tr><td>Unit Fwd</td><td style="background-color: lightgreen;">000.0</td></tr>
-                                                    <tr><td>Intrugen</td><td style="background-color: lightgreen;">000.0</td></tr>
-                                                    <tr><td>Injection</td><td style="background-color: lightgreen;">000.0</td></tr>
-                                                    <tr><td>Hold On</td><td style="background-color: lightgreen;">000.0</td></tr>
-                                                    <tr><td>Refill</td><td style="background-color: lightgreen;">000.0</td></tr>
-                                                    <tr><td>Suckback</td><td style="background-color: lightgreen;">000.0</td></tr>
-                                                    <tr><td>Unit Ret</td><td style="background-color: lightgreen;">000.0</td></tr>
-                                                    <tr><td>Cooling</td><td style="background-color: lightgreen;">000.0</td></tr>
-                                                    <tr><td>Mold Open</td><td style="background-color: lightgreen;">000.0</td></tr>
-                                                    <tr><td>Cores Out</td><td style="background-color: lightgreen;">000.0</td></tr>
-                                                    <tr><td>Ejector Fwd</td><td style="background-color: lightgreen;">000.0</td></tr>
-                                                    <tr><td>Ejector Ret</td><td style="background-color: lightgreen;">000.0</td></tr>
-                                                    <tr><td>Cycle Delay</td><td style="background-color: lightgreen;">000.0</td></tr>
-                                                    <tr><td>Tot Cyc Time</td><td style="background-color: lightgreen;">000.0</td></tr>
-                                                   
+                                                    <tr><td>Mold Close</td><td id="MoldClose" style="background-color: lightgreen;">000.0</td></tr>
+                                                    <tr><td>Cores In</td><td id="CoresIn" style="background-color: lightgreen;">000.0</td></tr>
+                                                    <tr><td>Unit Fwd</td><td id="UnitFwd" style="background-color: lightgreen;">000.0</td></tr>
+                                                    <tr><td>Intrugen</td><td id="Intrugen" style="background-color: lightgreen;">000.0</td></tr>
+                                                    <tr><td>Injection</td><td id="Injection" style="background-color: lightgreen;">000.0</td></tr>
+                                                    <tr><td>Hold On</td><td id="HoldOn" style="background-color: lightgreen;">000.0</td></tr>
+                                                    <tr><td>Refill</td><td id="Refill" style="background-color: lightgreen;">000.0</td></tr>
+                                                    <tr><td>Suckback</td><td id="Suckback" style="background-color: lightgreen;">000.0</td></tr>
+                                                    <tr><td>Unit Ret</td><td id="UnitRet" style="background-color: lightgreen;">000.0</td></tr>
+                                                    <tr><td>Cooling</td><td id="Cooling" style="background-color: lightgreen;">000.0</td></tr>
+                                                    <tr><td>Mold Open</td><td id="MoldOpen" style="background-color: lightgreen;">000.0</td></tr>
+                                                    <tr><td>Cores Out</td><td id="CoresOut" style="background-color: lightgreen;">000.0</td></tr>
+                                                    <tr><td>Ejector Fwd</td><td id="EjectorFwd" style="background-color: lightgreen;">000.0</td></tr>
+                                                    <tr><td>Ejector Ret</td><td id="EjectorRet" style="background-color: lightgreen;">000.0</td></tr>
+                                                    <tr><td>Cycle Delay</td><td id="CycleDelay" style="background-color: lightgreen;">000.0</td></tr>
+                                                    <tr><td>Tot Cyc Time</td><td id="TotCycTime" style="background-color: lightgreen;">000.0</td></tr>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -658,96 +657,49 @@
 
         $(document).ready(function () {
             $('.menu-item').on('click', function (e) {
-                $('.menu-item').removeClass('active'); // remove active from all
-                $(this).addClass('active');            // add active to clicked
+                $('.menu-item').removeClass('active');
+                $(this).addClass('active');
             });
         });
 
-        function updatePage3Data() {
-
+        function updatePage2Data() {
             $.ajax({
-                url: 'http://54.174.179.193:82/Account/GetPageData',
+                url: 'https://localhost:7039/api/PageData/2',
                 type: 'GET',
-                data: { pageId: 3 }, // replace 5 with the actual ID
-                success: function (response) {
-                    if (response.response) {
-
-                        console.log("Data:", response.response);
-
-                        try {
-                            data = response.response;
-
-                            if (data.FlowSlow1 !== undefined) $("#FlowSlow1").text(data.FlowSlow1);
-                            if (data.FlowFast !== undefined) $("#FlowFast").text(data.FlowFast);
-                            if (data.FlowSlow2 !== undefined) $("#FlowSlow2").text(data.FlowSlow2);
-                            if (data.FlowSafety !== undefined) $("#FlowSafety").text(data.FlowSafety);
-                            if (data.FlowLocking !== undefined) $("#FlowLocking").text(data.FlowLocking);
-
-                            if (data.PressureSlow1 !== undefined) $("#PressureSlow1").text(data.PressureSlow1);
-                            if (data.PressureFast !== undefined) $("#PressureFast").text(data.PressureFast);
-                            if (data.PressureSlow2 !== undefined) $("#PressureSlow2").text(data.PressureSlow2);
-                            if (data.PressureSafety !== undefined) $("#PressureSafety").text(data.PressureSafety);
-                            if (data.PressureLocking !== undefined) $("#PressureLocking").text(data.PressureLocking);
-
-                            if (data.PositionSlow1 !== undefined) $("#PositionSlow1").text(data.PositionSlow1);
-                            if (data.PositionFast !== undefined) $("#PositionFast").text(data.PositionFast);
-                            if (data.PositionSlow2 !== undefined) $("#PositionSlow2").text(data.PositionSlow2);
-                            if (data.PositionSafety !== undefined) $("#PositionSafety").text(data.PositionSafety);
-                            if (data.PositionLocking !== undefined) $("#PositionLocking").text(data.PositionLocking);
-
-                            if (data.MoldCloseTimeSet !== undefined) $("#MoldCloseTimeSet").text(data.MoldCloseTimeSet);
-                            if (data.MoldSafetyTimeSet !== undefined) $("#MoldSafetyTimeSet").text(data.MoldSafetyTimeSet);
-                            if (data.LockingTimeSet !== undefined) $("#LockingTimeSet").text(data.LockingTimeSet);
-
-                            if (data.SetModeFlow !== undefined) $("#SetModeFlow").text(data.SetModeFlow);
-                            if (data.SetModePressure !== undefined) $("#SetModePressure").text(data.SetModePressure);
-
-                            //if (data.SpeedSlow1 !== undefined) $("#SpeedSlow1").text(data.SpeedSlow1);
-                            //if (data.SpeedFast !== undefined) $("#SpeedFast").text(data.SpeedFast);
-                            //if (data.SpeedSlow2 !== undefined) $("#SpeedSlow2").text(data.SpeedSlow2);
-                            //if (data.SpeedSafety !== undefined) $("#SpeedSafety").text(data.SpeedSafety);
-
-                            //if (data.ActStageTimeSlow1 !== undefined) $("#ActStageTimeSlow1").text(data.ActStageTimeSlow1);
-                            //if (data.ActStageTimeFast !== undefined) $("#ActStageTimeFast").text(data.ActStageTimeFast);
-                            //if (data.ActStageTimeSlow2 !== undefined) $("#ActStageTimeSlow2").text(data.ActStageTimeSlow2);
-                            //if (data.ActStageTimeSafety !== undefined) $("#ActStageTimeSafety").text(data.ActStageTimeSafety);
-                            //if (data.ActStageTimeLocking !== undefined) $("#ActStageTimeLocking").text(data.ActStageTimeLocking);
-
-                            //if (data.ActualForce !== undefined) $("#ActualForce").text(data.ActualForce);
-                            //if (data.ClampPosition !== undefined) $("#ClampPosition").text(data.ClampPosition);
-
-                            //if (data.MoldCloseTimeActual !== undefined) $("#MoldCloseTimeActual").text(data.MoldCloseTimeActual);
-                            //if (data.MoldSafetyTimeActual !== undefined) $("#MoldSafetyTimeActual").text(data.MoldSafetyTimeActual);
-                            //if (data.LockingTimeActual !== undefined) $("#LockingTimeActual").text(data.LockingTimeActual);
-
-                            //if (data.MoldCloseTimeLast !== undefined) $("#MoldCloseTimeLast").text(data.MoldCloseTimeLast);
-                            //if (data.MoldSafetyTimeLast !== undefined) $("#MoldSafetyTimeLast").text(data.MoldSafetyTimeLast);
-
-
-                        } catch (e) {
-                            console.log("Failed to parse response JSON:");
-                            return;
-                        }
-
-
-
-
-                    } else {
-                        alert(response.messageResponse);
+                success: function (data) {
+                    try {
+                        if (data.moldClose  !== undefined) $("#MoldClose").text(data.moldClose);
+                        if (data.coresIn    !== undefined) $("#CoresIn").text(data.coresIn);
+                        if (data.unitFwd    !== undefined) $("#UnitFwd").text(data.unitFwd);
+                        if (data.intrugen   !== undefined) $("#Intrugen").text(data.intrugen);
+                        if (data.injection  !== undefined) $("#Injection").text(data.injection);
+                        if (data.holdOn     !== undefined) $("#HoldOn").text(data.holdOn);
+                        if (data.refill     !== undefined) $("#Refill").text(data.refill);
+                        if (data.suckback   !== undefined) $("#Suckback").text(data.suckback);
+                        if (data.unitRet    !== undefined) $("#UnitRet").text(data.unitRet);
+                        if (data.cooling    !== undefined) $("#Cooling").text(data.cooling);
+                        if (data.moldOpen   !== undefined) $("#MoldOpen").text(data.moldOpen);
+                        if (data.coresOut   !== undefined) $("#CoresOut").text(data.coresOut);
+                        if (data.ejectorFwd !== undefined) $("#EjectorFwd").text(data.ejectorFwd);
+                        if (data.ejectorRet !== undefined) $("#EjectorRet").text(data.ejectorRet);
+                        if (data.cycleDelay !== undefined) $("#CycleDelay").text(data.cycleDelay);
+                        if (data.totCycTime !== undefined) $("#TotCycTime").text(data.totCycTime);
+                    } catch (e) {
+                        console.log("Failed to parse Page2 data:", e);
                     }
                 },
                 error: function (xhr, status, error) {
-                    console.log("Error");
+                    console.log("Error fetching Page2 data:", error);
                 }
             });
-
         }
 
-        // Initial call
-        updatePage3Data();
+        // Initial call on page load
+        updatePage2Data();
 
-        // Call every 5 seconds
-        setInterval(updatePage3Data, 3000);
+        // Refresh every 3 seconds
+        setInterval(updatePage2Data, 3000);
+
     </script>
 
 

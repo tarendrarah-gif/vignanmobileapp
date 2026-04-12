@@ -1,0 +1,22 @@
+CREATE TABLE [dbo].[tblPage2] (
+    [DataId]       INT           IDENTITY (1, 1) NOT NULL,
+    [MoldClose]    NVARCHAR (10) NULL,
+    [CoresIn]      NVARCHAR (10) NULL,
+    [UnitFwd]      NVARCHAR (10) NULL,
+    [Intrugen]     NVARCHAR (10) NULL,
+    [Injection]    NVARCHAR (10) NULL,
+    [HoldOn]       NVARCHAR (10) NULL,
+    [Refill]       NVARCHAR (10) NULL,
+    [Suckback]     NVARCHAR (10) NULL,
+    [UnitRet]      NVARCHAR (10) NULL,
+    [Cooling]      NVARCHAR (10) NULL,
+    [MoldOpen]     NVARCHAR (10) NULL,
+    [CoresOut]     NVARCHAR (10) NULL,
+    [EjectorFwd]   NVARCHAR (10) NULL,
+    [EjectorRet]   NVARCHAR (10) NULL,
+    [CycleDelay]   NVARCHAR (10) NULL,
+    [TotCycTime]   NVARCHAR (10) NULL,
+    [CreatedOn]    DATETIME      DEFAULT (GETDATE()) NULL,
+    [IsActive]     BIT           DEFAULT ((1)) NULL,
+    CONSTRAINT [PK_tblPage2] PRIMARY KEY CLUSTERED ([DataId] ASC)
+);

@@ -19,9 +19,10 @@ namespace VigInsight.Data.Repositories
         {
             return pageId switch
             {
-                3 => GetPage3Data(),
-                5 => GetPage5Data(),
-                7 => GetPage7Data(),
+                2  => GetPage2Data(),
+                3  => GetPage3Data(),
+                5  => GetPage5Data(),
+                7  => GetPage7Data(),
                 10 => GetPage10Data(),
                 11 => GetPage11Data(),
                 14 => GetPage14Data(),
@@ -35,11 +36,54 @@ namespace VigInsight.Data.Repositories
                 34 => GetPage34Data(),
                 44 => GetPage44Data(),
                 53 => GetPage53Data(),
-                _ => null
+                _  => null
             };
         }
 
-      
+        public Page2Model GetPage2Data()
+        {
+            var model = new Page2Model();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(_connectionString))
+                {
+                    SqlCommand cmd = new SqlCommand("usp_GetPage2Data", conn);
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    conn.Open();
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            model.DataId     = Convert.ToInt32(reader["DataId"]);
+                            model.MoldClose  = Convert.ToString(reader["MoldClose"]);
+                            model.CoresIn    = Convert.ToString(reader["CoresIn"]);
+                            model.UnitFwd    = Convert.ToString(reader["UnitFwd"]);
+                            model.Intrugen   = Convert.ToString(reader["Intrugen"]);
+                            model.Injection  = Convert.ToString(reader["Injection"]);
+                            model.HoldOn     = Convert.ToString(reader["HoldOn"]);
+                            model.Refill     = Convert.ToString(reader["Refill"]);
+                            model.Suckback   = Convert.ToString(reader["Suckback"]);
+                            model.UnitRet    = Convert.ToString(reader["UnitRet"]);
+                            model.Cooling    = Convert.ToString(reader["Cooling"]);
+                            model.MoldOpen   = Convert.ToString(reader["MoldOpen"]);
+                            model.CoresOut   = Convert.ToString(reader["CoresOut"]);
+                            model.EjectorFwd = Convert.ToString(reader["EjectorFwd"]);
+                            model.EjectorRet = Convert.ToString(reader["EjectorRet"]);
+                            model.CycleDelay = Convert.ToString(reader["CycleDelay"]);
+                            model.TotCycTime = Convert.ToString(reader["TotCycTime"]);
+                            model.CreatedOn  = Convert.ToDateTime(reader["CreatedOn"]);
+                            model.IsActive   = Convert.ToBoolean(reader["IsActive"]);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error in GetPage2Data: " + ex.Message);
+            }
+            return model;
+        }
+
         public Page3Model GetPage3Data()
         {
 

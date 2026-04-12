@@ -10,6 +10,7 @@ namespace VigInsight.Core.Interfaces
     public interface IPageDataService
     {
         object GetPageData(int pageId);
+        Page2Model GetPage2Data();
         Page3Model GetPage3Data();
         Page5Model GetPage5Data();
         Page7Model GetPage7Data();

@@ -98,4 +98,7 @@
     <Build Include="dbo\Stored Procedures\usp_GetUsersByOrganization.sql" />
     <Build Include="dbo\Stored Procedures\usp_InsertMachineOrganization.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="VignanInsightDB.publish.xml" />
+  </ItemGroup>
 </Project>
