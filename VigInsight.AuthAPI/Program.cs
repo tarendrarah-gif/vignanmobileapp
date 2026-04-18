@@ -62,6 +62,10 @@ builder.Services.AddScoped<IMachineOrganizationRepository, MachineOrganizationRe
 builder.Services.AddScoped<IMachineOrganizationService, MachineOrganizationService>();
 builder.Services.AddScoped<IPageDataService, PageDataRepository>();
 
+// Roles DI
+builder.Services.AddScoped<IRoleRepository, RoleRepository>();
+builder.Services.AddScoped<IRoleService, RoleService>();
+
 var app = builder.Build();
 
 // Swagger UI (for testing)

@@ -10,7 +10,9 @@ namespace VigInsight.Core.Models
 
         public string Password { get; set; }
 
-        public string Role { get; set; }
+        public int RoleId { get; set; }
+
+        public RoleModel? Role { get; set; } // navigation (optional in Dapper mapping)
 
         public bool IsActive { get; set; }
 

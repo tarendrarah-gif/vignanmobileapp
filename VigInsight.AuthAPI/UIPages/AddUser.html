@@ -184,11 +184,6 @@
                                                 <label for="role" class="form-label">Role</label>
                                                 <select class="form-select" id="role" name="role" required>
                                                     <option value="">Select Role</option>
-                                                    <option value="Client">Client</option>
-                                                    <option value="Admin">Admin</option>
-                                                    <option value="User">User</option>
-                                                    <option value="Operator">Operator</option>
-                                                    <option value="Manager">Manager</option>
                                                 </select>
                                             </div>
                                             <div class="mb-3">
@@ -290,7 +285,26 @@
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <script>
-        // Prevent any chance of the handler being registered more than once
+        async function loadRolesToDropdown() {
+            try {
+                const res = await fetch('https://localhost:7039/api/Role');
+                if (!res.ok) throw new Error('Failed to load roles');
+                const roles = await res.json();
+                const select = document.getElementById('role');
+                // clear existing
+                select.innerHTML = '<option value="">Select Role</option>';
+                roles.forEach(r => {
+                    const opt = document.createElement('option');
+                    opt.value = r.roleId;
+                    opt.textContent = r.roleName;
+                    select.appendChild(opt);
+                });
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        // Modify submit handler to send RoleID
         (function () {
             const form = document.getElementById('addUserForm');
             const submitBtn = form.querySelector('button[type="submit"]');
@@ -323,7 +337,7 @@
                 var username = document.getElementById('username').value;
                 var password = document.getElementById('password').value;
                 var confirmPassword = document.getElementById('confirmPassword').value;
-                var role = document.getElementById('role').value;
+                var roleId = parseInt(document.getElementById('role').value || '0');
                 var isActive = document.getElementById('isActive').value === 'true';
                 var organizationId = document.getElementById('organizationId').value;
 
@@ -333,12 +347,18 @@
                     hideLoader();
                     return;
                 }
+                if (!roleId) {
+                    document.getElementById('addUserError').textContent = 'Please select a role.';
+                    document.getElementById('addUserError').classList.remove('d-none');
+                    hideLoader();
+                    return;
+                }
 
                 var now = new Date();
                 var user = {
                     username: username,
                     password: password,
-                    role: role,
+                    roleId: roleId,
                     isActive: isActive,
                     createdBy: 'admin',
                     createdOn: now.toISOString(),
@@ -401,7 +421,10 @@
                 // Optionally handle error
             }
         }
-        document.addEventListener('DOMContentLoaded', loadOrganizations);
+        document.addEventListener('DOMContentLoaded', () => {
+            loadOrganizations();
+            loadRolesToDropdown();
+        });
     </script>
 </body>
 </html>

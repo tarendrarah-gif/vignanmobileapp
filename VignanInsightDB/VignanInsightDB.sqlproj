@@ -100,6 +100,7 @@
     <Build Include="dbo\Stored Procedures\usp_GetPage2Data.sql" />
     <Build Include="dbo\Tables\tblPage2.sql" />
     <Build Include="SeedData_tblPage2.sql" />
+    <Build Include="001_Create_tblRoleMaster_and_update_users.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="VignanInsightDB.publish.xml" />

@@ -9,11 +9,13 @@ namespace VigInsight.AuthAPI.Services
     {
         private readonly IUserRepository _userRepository;
         private readonly IUserOrganizationService _userOrganizationService;
+        private readonly IRoleService _roleService;
 
-        public UserService(IUserRepository userRepository, IUserOrganizationService userOrganizationService)
+        public UserService(IUserRepository userRepository, IUserOrganizationService userOrganizationService, IRoleService roleService)
         {
             _userRepository = userRepository;
             _userOrganizationService = userOrganizationService;
+            _roleService = roleService;
         }
 
         public async Task<UserModel?> ValidateUserAsync(string username, string password)
@@ -23,6 +25,13 @@ namespace VigInsight.AuthAPI.Services
 
         public async Task<int> AddUserAsync(UserModel user, int organizationId)
         {
+            // Validate RoleID exists
+            var role = await _roleService.GetRoleByIdAsync(user.RoleId);
+            if (role == null)
+            {
+                throw new System.Exception("Invalid RoleId specified");
+            }
+
             var userId = await _userRepository.InsertUserAsync(user);
             await _userOrganizationService.AddUserOrganizationAsync(userId, organizationId);
             return userId;

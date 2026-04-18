@@ -31,7 +31,7 @@ namespace VigInsight.Data.Repositories
 
                 return user;
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
                 // Optionally log the exception here
                 throw; // Rethrow for now
@@ -47,13 +47,12 @@ namespace VigInsight.Data.Repositories
                 {
                     Username = user.Username,
                     Password = user.Password,
-                    Role = user.Role,
+                    RoleID = user.RoleId,
                     IsActive = user.IsActive,
                     CreatedBy = user.CreatedBy,
                     CreatedOn = user.CreatedOn,
                     ModifiedBy = user.ModifiedBy,
                     ModifiedOn = user.ModifiedOn
-                    // OrganizationId removed for mapping table approach
                 };
                 // Assumes usp_InsertUser returns the new UserId
                 var userId = await conn.ExecuteScalarAsync<int>(
@@ -63,7 +62,7 @@ namespace VigInsight.Data.Repositories
                 );
                 return userId;
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
                 throw;
             }
@@ -80,7 +79,7 @@ namespace VigInsight.Data.Repositories
                 );
                 return users;
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
                 throw;
             }
