@@ -101,7 +101,16 @@
     <Build Include="dbo\Tables\tblPage2.sql" />
     <Build Include="SeedData_tblPage2.sql" />
     <Build Include="001_Create_tblRoleMaster_and_update_users.sql" />
-    <Build Include="002_CRUD_StoredProcedures.sql" />
+    <Build Include="usp_GetUserById.sql" />
+    <Build Include="usp_UpdateUser.sql" />
+    <Build Include="usp_DeleteUser.sql" />
+    <Build Include="usp_GetAllMachines.sql" />
+    <Build Include="usp_GetMachineById.sql" />
+    <Build Include="usp_UpdateMachine.sql" />
+    <Build Include="usp_DeleteMachine.sql" />
+    <Build Include="usp_GetOrganizationById.sql" />
+    <Build Include="usp_UpdateOrganization.sql" />
+    <Build Include="usp_DeleteOrganization.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="VignanInsightDB.publish.xml" />

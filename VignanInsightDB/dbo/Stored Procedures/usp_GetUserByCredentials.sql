@@ -5,12 +5,24 @@ AS
 BEGIN
     SET NOCOUNT ON;
 
-    SELECT u.*,
+    SELECT
+        u.UserId,
+        u.Username,
+        u.Password,
+        u.RoleID          AS RoleId,
+        r.RoleName,
+        u.IsActive,
+        u.CreatedBy,
+        u.CreatedOn,
+        u.ModifiedBy,
+        u.ModifiedOn,
         o.OrganizationId,
         o.OrganizationName
     FROM tblUsersMaster u
-    INNER JOIN tblUserOrganization uo ON u.UserId = uo.UserId
-    INNER JOIN tblOrganization o ON uo.OrganizationId = o.OrganizationId
-    WHERE u.Username = @Username AND u.Password = @Password
-    AND u.IsActive=1
+    LEFT  JOIN tblRoleMaster       r  ON u.RoleID          = r.RoleID
+    INNER JOIN tblUserOrganization uo ON u.UserId           = uo.UserId
+    INNER JOIN tblOrganization     o  ON uo.OrganizationId  = o.OrganizationId
+    WHERE u.Username = @Username
+      AND u.Password = @Password
+      AND u.IsActive = 1;
 END

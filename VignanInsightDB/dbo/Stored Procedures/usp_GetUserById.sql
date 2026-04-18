@@ -1,5 +1,5 @@
-﻿CREATE PROCEDURE [dbo].[usp_GetAllUsers]
-    @OrgId INT = NULL
+CREATE PROCEDURE [dbo].[usp_GetUserById]
+    @UserId INT
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -23,10 +23,5 @@ BEGIN
          WHERE uo2.UserId = u.UserId)                       AS OrganizationName
     FROM tblUsersMaster u
     LEFT JOIN tblRoleMaster r ON u.RoleID = r.RoleID
-    WHERE (@OrgId IS NULL
-        OR EXISTS (
-            SELECT 1 FROM tblUserOrganization uo
-            WHERE uo.UserId = u.UserId AND uo.OrganizationId = @OrgId
-        ))
-    ORDER BY u.UserId ASC;
+    WHERE u.UserId = @UserId;
 END

@@ -101,7 +101,7 @@
                 </div>
                 <footer class="content-footer footer bg-footer-theme">
                     <div class="container-xxl py-2">
-                        <div>© <script>document.write(new Date().getFullYear())</script>, made by <a href="https://www.vignanelectronics.com/" target="_blank" class="footer-link fw-bolder">Vignan Electronics</a></div>
+                        <div>ï¿½ <script>document.write(new Date().getFullYear())</script>, made by <a href="https://www.vignanelectronics.com/" target="_blank" class="footer-link fw-bolder">Vignan Electronics</a></div>
                     </div>
                 </footer>
                 <div class="content-backdrop fade"></div>
@@ -233,7 +233,7 @@ function renderTable() {
     const rows  = data.slice(start, start + pageSize);
     const tbody = document.getElementById('orgTableBody');
     document.getElementById('recordCount').textContent =
-        `Showing ${start + 1}–${Math.min(start + pageSize, data.length)} of ${data.length} organizations`;
+        `Showing ${start + 1}ï¿½${Math.min(start + pageSize, data.length)} of ${data.length} organizations`;
 
     if (!rows.length) {
         tbody.innerHTML = `<tr><td colspan="6" class="text-center text-muted py-4">No organizations found.</td></tr>`;
@@ -251,11 +251,11 @@ function renderTable() {
                     <span class="fw-semibold">${o.organizationName}</span>
                 </div>
             </td>
-            <td><small class="text-muted">${o.organizationDescription || '—'}</small></td>
+            <td><small class="text-muted">${o.organizationDescription || 'ï¿½'}</small></td>
             <td>${o.isActive
                 ? '<span class="badge bg-label-success">Active</span>'
                 : '<span class="badge bg-label-secondary">Inactive</span>'}</td>
-            <td><small class="text-muted">${o.createdOn ? new Date(o.createdOn).toLocaleDateString() : '—'}</small></td>
+            <td><small class="text-muted">${o.createdOn ? new Date(o.createdOn).toLocaleDateString() : 'ï¿½'}</small></td>
             <td class="text-center">
                 ${canWrite ? `
                 <button class="btn btn-sm btn-icon btn-outline-primary me-1" title="Edit" onclick="openEditModal(${o.organizationId})">
@@ -263,7 +263,7 @@ function renderTable() {
                 </button>
                 <button class="btn btn-sm btn-icon btn-outline-danger" title="Delete" onclick="openDeleteModal(${o.organizationId}, '${o.organizationName.replace(/'/g, "\\'")}')">
                     <i class="bx bx-trash"></i>
-                </button>` : '<span class="text-muted small">—</span>'}
+                </button>` : '<span class="text-muted small">ï¿½</span>'}
             </td>
         </tr>`).join('');
 }
