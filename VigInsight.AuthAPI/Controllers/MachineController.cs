@@ -17,32 +17,53 @@ namespace VigInsight.AuthAPI.Controllers
             _machineService = machineService;
         }
 
+        // GET /api/machine?userId=1&role=Admin
+        [HttpGet]
+        public async Task<IActionResult> GetMachines([FromQuery] int userId = 0, [FromQuery] string role = "Admin")
+        {
+            var result = await _machineService.GetMachinesByRoleAsync(userId, role);
+            return result.Success ? Ok(result.Data) : BadRequest(result.Message);
+        }
+
+        // GET /api/machine/5
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetMachine(int id)
+        {
+            var result = await _machineService.GetMachineByIdAsync(id);
+            return result.Success ? Ok(result.Data) : NotFound(result.Message);
+        }
+
+        // POST /api/machine
         [HttpPost]
         public async Task<IActionResult> AddMachine([FromBody] AddMachineRequest request)
         {
-            try
-            {
-                var machineId = await _machineService.AddMachineAsync(request.Machine, request.OrganizationId);
-                return Ok(new { MachineId = machineId });
-            }
-            catch (System.Exception ex)
-            {
-                return StatusCode(500, $"Error adding machine: {ex.Message}");
-            }
+            var result = await _machineService.AddMachineAsync(request.Machine, request.OrganizationId);
+            return result.Success ? Ok(new { MachineId = result.Data }) : BadRequest(result.Message);
         }
 
-        [HttpGet("ByOrganization/{organizationId}")]
-        public async Task<ActionResult<IEnumerable<MachineCardDto>>> GetMachinesByOrganization(int organizationId)
+        // PUT /api/machine/5
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateMachine(int id, [FromBody] UpdateMachineRequest request)
         {
-            try
-            {
-                var machines = await _machineService.GetMachinesByOrganizationAsync(organizationId);
-                return Ok(machines);
-            }
-            catch (System.Exception ex)
-            {
-                return StatusCode(500, $"Error fetching machines: {ex.Message}");
-            }
+            if (id != request.Machine.MachineId) return BadRequest("ID mismatch.");
+            var result = await _machineService.UpdateMachineAsync(request.Machine, request.OrganizationId);
+            return result.Success ? Ok(result.Message) : BadRequest(result.Message);
+        }
+
+        // DELETE /api/machine/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteMachine(int id)
+        {
+            var result = await _machineService.DeleteMachineAsync(id);
+            return result.Success ? Ok(result.Message) : BadRequest(result.Message);
+        }
+
+        // Legacy – used by ClientDashboard
+        [HttpGet("ByOrganization/{organizationId}")]
+        public async Task<IActionResult> GetMachinesByOrganization(int organizationId)
+        {
+            var machines = await _machineService.GetMachinesByOrganizationAsync(organizationId);
+            return Ok(machines);
         }
     }
 }

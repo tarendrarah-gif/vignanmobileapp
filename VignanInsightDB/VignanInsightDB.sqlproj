@@ -101,6 +101,7 @@
     <Build Include="dbo\Tables\tblPage2.sql" />
     <Build Include="SeedData_tblPage2.sql" />
     <Build Include="001_Create_tblRoleMaster_and_update_users.sql" />
+    <Build Include="002_CRUD_StoredProcedures.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="VignanInsightDB.publish.xml" />

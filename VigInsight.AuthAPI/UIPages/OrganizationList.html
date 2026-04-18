@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
-    <title>User Management | Vignan</title>
+    <title>Organization Management | Vignan</title>
     <link rel="icon" type="image/x-icon" href="./assets/img/favicon/favicon.ico" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -34,33 +34,29 @@
             <div class="menu-inner-shadow"></div>
             <ul class="menu-inner py-1">
                 <li class="menu-item"><a href="AdminDashboard.html" class="menu-link"><i class="menu-icon tf-icons bx bx-grid-alt"></i><div>Admin Dashboard</div></a></li>
-                <li class="menu-item active"><a href="UserList.html" class="menu-link"><i class="menu-icon tf-icons bx bx-group"></i><div>Users</div></a></li>
+                <li class="menu-item"><a href="UserList.html" class="menu-link"><i class="menu-icon tf-icons bx bx-group"></i><div>Users</div></a></li>
                 <li class="menu-item"><a href="MachineList.html" class="menu-link"><i class="menu-icon tf-icons bx bx-chip"></i><div>Machines</div></a></li>
-                <li class="menu-item"><a href="OrganizationList.html" class="menu-link"><i class="menu-icon tf-icons bx bx-buildings"></i><div>Organizations</div></a></li>
+                <li class="menu-item active"><a href="OrganizationList.html" class="menu-link"><i class="menu-icon tf-icons bx bx-buildings"></i><div>Organizations</div></a></li>
             </ul>
         </aside>
         <!-- /Sidebar -->
         <div class="layout-page">
-            <!-- Navbar -->
             <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
                 <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
                     <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)"><i class="bx bx-menu bx-sm"></i></a>
                 </div>
                 <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-                    <!-- Live search -->
                     <div class="navbar-nav align-items-center">
                         <div class="nav-item d-flex align-items-center">
                             <i class="bx bx-search fs-4 lh-0"></i>
                             <input type="text" id="searchInput" class="form-control border-0 shadow-none"
-                                   placeholder="Search users..." oninput="filterTable()" />
+                                   placeholder="Search organizations..." oninput="filterTable()" />
                         </div>
                     </div>
                     <ul class="navbar-nav flex-row align-items-center ms-auto">
                         <li class="nav-item navbar-dropdown dropdown-user dropdown">
                             <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
-                                <div class="avatar avatar-online">
-                                    <img src="./assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
-                                </div>
+                                <div class="avatar avatar-online"><img src="./assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" /></div>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li><a class="dropdown-item" href="index.html" onclick="localStorage.removeItem('user')"><i class="bx bx-power-off me-2"></i>Log Out</a></li>
@@ -69,32 +65,30 @@
                     </ul>
                 </div>
             </nav>
-            <!-- /Navbar -->
             <div class="content-wrapper">
                 <div class="container-xxl flex-grow-1 container-p-y">
                     <div class="card">
                         <div class="card-header d-flex justify-content-between align-items-center py-3">
-                            <h5 class="mb-0"><i class="bx bx-group me-2 text-primary"></i>User Management</h5>
-                            <button class="btn btn-primary btn-sm" id="btnAddUser" onclick="openAddModal()">
-                                <i class="bx bx-plus me-1"></i>Add New User
+                            <h5 class="mb-0"><i class="bx bx-buildings me-2 text-info"></i>Organization Management</h5>
+                            <button class="btn btn-primary btn-sm" id="btnAddOrg" onclick="openAddModal()">
+                                <i class="bx bx-plus me-1"></i>Add New Organization
                             </button>
                         </div>
                         <div class="card-body p-0">
                             <div class="table-responsive">
-                                <table class="table table-hover align-middle mb-0" id="userTable">
+                                <table class="table table-hover align-middle mb-0" id="orgTable">
                                     <thead class="table-light">
                                         <tr>
                                             <th>#</th>
-                                            <th>Username</th>
-                                            <th>Role</th>
-                                            <th>Organization</th>
+                                            <th>Organization Name</th>
+                                            <th>Description</th>
                                             <th>Status</th>
                                             <th>Created</th>
                                             <th class="text-center" id="actionsHeader">Actions</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="userTableBody">
-                                        <tr><td colspan="7" class="text-center py-4"><div class="spinner-border text-primary" role="status"></div></td></tr>
+                                    <tbody id="orgTableBody">
+                                        <tr><td colspan="6" class="text-center py-4"><div class="spinner-border text-primary" role="status"></div></td></tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -107,7 +101,7 @@
                 </div>
                 <footer class="content-footer footer bg-footer-theme">
                     <div class="container-xxl py-2">
-                        <div>© <script>document.write(new Date().getFullYear())</script>, made by <a href="https://www.vignanelectronics.com/" target="_blank" class="footer-link fw-bolder">Vignan Electronics</a></div>
+                        <div>� <script>document.write(new Date().getFullYear())</script>, made by <a href="https://www.vignanelectronics.com/" target="_blank" class="footer-link fw-bolder">Vignan Electronics</a></div>
                     </div>
                 </footer>
                 <div class="content-backdrop fade"></div>
@@ -117,40 +111,24 @@
     <div class="layout-overlay layout-menu-toggle"></div>
 </div>
 
-<!-- ── Add / Edit Modal ─────────────────────────────────────── -->
-<div class="modal fade" id="userModal" tabindex="-1" aria-hidden="true">
+<!-- Add / Edit Modal -->
+<div class="modal fade" id="orgModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modalTitle">Add User</h5>
+                <h5 class="modal-title" id="modalTitle">Add Organization</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <form id="userForm" autocomplete="off">
-                    <input type="hidden" id="editUserId" value="0" />
+                <form id="orgForm" autocomplete="off">
+                    <input type="hidden" id="editOrgId" value="0" />
                     <div class="mb-3">
-                        <label class="form-label">Username <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="fUsername" required />
-                    </div>
-                    <div class="mb-3" id="passwordRow">
-                        <label class="form-label">Password <span class="text-danger">*</span></label>
-                        <input type="password" class="form-control" id="fPassword" />
-                    </div>
-                    <div class="mb-3" id="confirmPasswordRow">
-                        <label class="form-label">Confirm Password <span class="text-danger">*</span></label>
-                        <input type="password" class="form-control" id="fConfirmPassword" />
+                        <label class="form-label">Organization Name <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="fOrgName" required />
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Role <span class="text-danger">*</span></label>
-                        <select class="form-select" id="fRoleId" required>
-                            <option value="">Select Role</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Organization <span class="text-danger">*</span></label>
-                        <select class="form-select" id="fOrganizationId" required>
-                            <option value="">Select Organization</option>
-                        </select>
+                        <label class="form-label">Description</label>
+                        <textarea class="form-control" id="fOrgDescription" rows="3"></textarea>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Status</label>
@@ -164,7 +142,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary" id="btnSave" onclick="saveUser()">
+                <button type="button" class="btn btn-primary" id="btnSave" onclick="saveOrganization()">
                     <span id="btnSaveText">Save</span>
                     <span id="btnSaveSpinner" class="spinner-border spinner-border-sm d-none ms-1"></span>
                 </button>
@@ -173,14 +151,15 @@
     </div>
 </div>
 
-<!-- ── Delete Confirm Modal ──────────────────────────────────── -->
+<!-- Delete Confirm Modal -->
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-sm">
         <div class="modal-content">
             <div class="modal-body text-center py-4">
                 <i class="bx bx-trash text-danger" style="font-size:3rem;"></i>
-                <h5 class="mt-2">Delete User?</h5>
-                <p class="text-muted mb-0" id="deleteUserName"></p>
+                <h5 class="mt-2">Delete Organization?</h5>
+                <p class="text-muted mb-0" id="deleteOrgName"></p>
+                <p class="text-warning small mt-1">This will also remove all user and machine associations.</p>
             </div>
             <div class="modal-footer justify-content-center border-0 pt-0">
                 <button class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">Cancel</button>
@@ -190,7 +169,6 @@
     </div>
 </div>
 
-<!-- JS -->
 <script src="./assets/vendor/libs/jquery/jquery.js"></script>
 <script src="./assets/vendor/libs/popper/popper.js"></script>
 <script src="./assets/vendor/js/bootstrap.js"></script>
@@ -198,129 +176,100 @@
 <script src="./assets/vendor/js/menu.js"></script>
 <script src="./assets/js/main.js"></script>
 <script>
-// ── Auth guard ────────────────────────────────────────────────
+// ?? Auth guard ????????????????????????????????????????????????
 (function () {
     const user = JSON.parse(localStorage.getItem('user') || 'null');
     if (!user) { window.location.href = 'index.html'; }
 })();
 
 const API = 'https://localhost:7039';
-let allUsers = [], allRoles = [], allOrgs = [];
+let allOrgs = [];
 let currentPage = 1;
 const pageSize = 10;
 let deleteTargetId = 0;
 
-// ── Normalise role from localStorage (API returns "role" key) ─
+// ?? Normalise role from localStorage ?????????????????????????
 const currentUser = JSON.parse(localStorage.getItem('user') || '{}');
-const _role     = (currentUser.role || currentUser.roleName || '').toLowerCase();
-const isAdmin   = _role === 'admin';
-const isClient  = _role === 'client';
-const canWrite  = isAdmin || isClient;
+const _role    = (currentUser.role || currentUser.roleName || '').toLowerCase();
+const isAdmin  = _role === 'admin';
+const canWrite = isAdmin;
 
 document.addEventListener('DOMContentLoaded', async () => {
     if (!canWrite) {
-        document.getElementById('btnAddUser').classList.add('d-none');
+        document.getElementById('btnAddOrg').classList.add('d-none');
         document.getElementById('actionsHeader').classList.add('d-none');
     }
-    await Promise.all([loadRoles(), loadOrganizations()]);
-    await loadUsers();
+    await loadOrganizations();
 });
 
-async function loadUsers() {
+async function loadOrganizations() {
     try {
         const qs = currentUser.userId
             ? `?userId=${currentUser.userId}&role=${currentUser.roleName || currentUser.role || 'Admin'}`
             : '';
-        const res = await fetch(`${API}/api/User${qs}`);
+        const res = await fetch(`${API}/api/Organization${qs}`);
         if (!res.ok) throw new Error(await res.text());
-        allUsers = await res.json();
+        allOrgs = await res.json();
         currentPage = 1;
         renderTable();
         renderPagination();
-    } catch (err) {
-        showTableError(err.message);
-    }
+    } catch (err) { showTableError(err.message); }
 }
 
-async function loadRoles() {
-    try {
-        const res = await fetch(`${API}/api/Role`);
-        if (!res.ok) return;
-        allRoles = await res.json();
-        const sel = document.getElementById('fRoleId');
-        sel.innerHTML = '<option value="">Select Role</option>';
-        allRoles.forEach(r => sel.insertAdjacentHTML('beforeend', `<option value="${r.roleId}">${r.roleName}</option>`));
-    } catch {}
-}
-
-async function loadOrganizations() {
-    try {
-        const res = await fetch(`${API}/api/Organization`);
-        if (!res.ok) return;
-        allOrgs = await res.json();
-        const sel = document.getElementById('fOrganizationId');
-        sel.innerHTML = '<option value="">Select Organization</option>';
-        allOrgs.forEach(o => sel.insertAdjacentHTML('beforeend', `<option value="${o.organizationId}">${o.organizationName}</option>`));
-    } catch {}
-}
-
-function roleName(roleId) {
-    const r = allRoles.find(x => x.roleId === roleId);
-    return r ? r.roleName : roleId;
-}
-function orgName(orgId) {
-    const o = allOrgs.find(x => x.organizationId === orgId);
-    return o ? o.organizationName : (orgId || '—');
-}
-
-function filteredUsers() {
+function filteredOrgs() {
     const q = document.getElementById('searchInput').value.toLowerCase();
-    if (!q) return allUsers;
-    return allUsers.filter(u =>
-        (u.username || '').toLowerCase().includes(q) ||
-        (u.roleName || roleName(u.roleId) || '').toLowerCase().includes(q) ||
-        (u.organizationName || orgName(u.organizationId) || '').toLowerCase().includes(q)
+    if (!q) return allOrgs;
+    return allOrgs.filter(o =>
+        (o.organizationName || '').toLowerCase().includes(q) ||
+        (o.organizationDescription || '').toLowerCase().includes(q)
     );
 }
 
 function filterTable() { currentPage = 1; renderTable(); renderPagination(); }
 
 function renderTable() {
-    const data = filteredUsers();
+    const data  = filteredOrgs();
     const start = (currentPage - 1) * pageSize;
     const rows  = data.slice(start, start + pageSize);
-    const tbody = document.getElementById('userTableBody');
-    document.getElementById('recordCount').textContent = `Showing ${start + 1}–${Math.min(start + pageSize, data.length)} of ${data.length} users`;
+    const tbody = document.getElementById('orgTableBody');
+    document.getElementById('recordCount').textContent =
+        `Showing ${start + 1}�${Math.min(start + pageSize, data.length)} of ${data.length} organizations`;
 
     if (!rows.length) {
-        tbody.innerHTML = `<tr><td colspan="7" class="text-center text-muted py-4">No users found.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="6" class="text-center text-muted py-4">No organizations found.</td></tr>`;
         return;
     }
 
-    tbody.innerHTML = rows.map((u, i) => `
+    tbody.innerHTML = rows.map((o, i) => `
         <tr>
             <td><span class="text-muted small">${start + i + 1}</span></td>
-            <td><span class="fw-semibold">${u.username}</span></td>
-            <td><span class="badge bg-label-primary">${u.roleName || roleName(u.roleId) || '—'}</span></td>
-            <td>${u.organizationName || orgName(u.organizationId) || '—'}</td>
-            <td>${u.isActive
+            <td>
+                <div class="d-flex align-items-center gap-2">
+                    <span class="avatar avatar-sm bg-label-info rounded">
+                        <i class="bx bx-buildings"></i>
+                    </span>
+                    <span class="fw-semibold">${o.organizationName}</span>
+                </div>
+            </td>
+            <td><small class="text-muted">${o.organizationDescription || '�'}</small></td>
+            <td>${o.isActive
                 ? '<span class="badge bg-label-success">Active</span>'
                 : '<span class="badge bg-label-secondary">Inactive</span>'}</td>
-            <td><small class="text-muted">${u.createdOn ? new Date(u.createdOn).toLocaleDateString() : '—'}</small></td>
+            <td><small class="text-muted">${o.createdOn ? new Date(o.createdOn).toLocaleDateString() : '�'}</small></td>
             <td class="text-center">
                 ${canWrite ? `
-                <button class="btn btn-sm btn-icon btn-outline-primary me-1" title="Edit" onclick="openEditModal(${u.userId})">
+                <button class="btn btn-sm btn-icon btn-outline-primary me-1" title="Edit" onclick="openEditModal(${o.organizationId})">
                     <i class="bx bx-edit-alt"></i>
                 </button>
-                <button class="btn btn-sm btn-icon btn-outline-danger" title="Delete" onclick="openDeleteModal(${u.userId}, '${u.username}')">
+                <button class="btn btn-sm btn-icon btn-outline-danger" title="Delete" onclick="openDeleteModal(${o.organizationId}, '${o.organizationName.replace(/'/g, "\\'")}')">
                     <i class="bx bx-trash"></i>
-                </button>` : '<span class="text-muted small">—</span>'}
+                </button>` : '<span class="text-muted small">�</span>'}
             </td>
         </tr>`).join('');
 }
 
 function renderPagination() {
-    const total = Math.ceil(filteredUsers().length / pageSize);
+    const total = Math.ceil(filteredOrgs().length / pageSize);
     const pag = document.getElementById('pagination');
     pag.innerHTML = '';
     for (let i = 1; i <= total; i++) {
@@ -332,69 +281,49 @@ function renderPagination() {
 }
 
 function openAddModal() {
-    document.getElementById('editUserId').value = '0';
-    document.getElementById('modalTitle').textContent = 'Add New User';
-    document.getElementById('userForm').reset();
-    document.getElementById('passwordRow').classList.remove('d-none');
-    document.getElementById('confirmPasswordRow').classList.remove('d-none');
-    document.getElementById('fPassword').required = true;
+    document.getElementById('editOrgId').value = '0';
+    document.getElementById('modalTitle').textContent = 'Add New Organization';
+    document.getElementById('orgForm').reset();
     document.getElementById('formError').classList.add('d-none');
-    new bootstrap.Modal(document.getElementById('userModal')).show();
+    new bootstrap.Modal(document.getElementById('orgModal')).show();
 }
 
-async function openEditModal(userId) {
-    document.getElementById('modalTitle').textContent = 'Edit User';
-    document.getElementById('editUserId').value = userId;
-    document.getElementById('passwordRow').classList.add('d-none');
-    document.getElementById('confirmPasswordRow').classList.add('d-none');
-    document.getElementById('fPassword').required = false;
+function openEditModal(orgId) {
+    const o = allOrgs.find(x => x.organizationId === orgId);
+    if (!o) return;
+    document.getElementById('editOrgId').value      = orgId;
+    document.getElementById('modalTitle').textContent = 'Edit Organization';
+    document.getElementById('fOrgName').value        = o.organizationName;
+    document.getElementById('fOrgDescription').value = o.organizationDescription || '';
+    document.getElementById('fIsActive').value       = o.isActive ? 'true' : 'false';
     document.getElementById('formError').classList.add('d-none');
-
-    const u = allUsers.find(x => x.userId === userId);
-    if (u) {
-        document.getElementById('fUsername').value = u.username;
-        document.getElementById('fRoleId').value   = u.roleId;
-        document.getElementById('fOrganizationId').value = u.organizationId || '';
-        document.getElementById('fIsActive').value = u.isActive ? 'true' : 'false';
-    }
-    new bootstrap.Modal(document.getElementById('userModal')).show();
+    new bootstrap.Modal(document.getElementById('orgModal')).show();
 }
 
-async function saveUser() {
-    const editId  = parseInt(document.getElementById('editUserId').value);
+async function saveOrganization() {
+    const editId  = parseInt(document.getElementById('editOrgId').value);
     const isEdit  = editId > 0;
-    const username = document.getElementById('fUsername').value.trim();
-    const roleId   = parseInt(document.getElementById('fRoleId').value || '0');
-    const orgId    = parseInt(document.getElementById('fOrganizationId').value || '0');
-    const isActive = document.getElementById('fIsActive').value === 'true';
-    const errDiv   = document.getElementById('formError');
-    errDiv.classList.add('d-none');
+    const name    = document.getElementById('fOrgName').value.trim();
+    const desc    = document.getElementById('fOrgDescription').value.trim();
+    const active  = document.getElementById('fIsActive').value === 'true';
 
-    if (!username) { showFormError('Username is required.'); return; }
-    if (!roleId)   { showFormError('Please select a role.'); return; }
-
-    if (!isEdit) {
-        const pw = document.getElementById('fPassword').value;
-        const cp = document.getElementById('fConfirmPassword').value;
-        if (!pw)      { showFormError('Password is required.'); return; }
-        if (pw !== cp) { showFormError('Passwords do not match.'); return; }
-    }
+    if (!name) { showFormError('Organization name is required.'); return; }
 
     setSaving(true);
     try {
+        const now = new Date().toISOString();
         let res;
         if (isEdit) {
-            const body = { userId: editId, username, roleId, isActive, modifiedBy: currentUser.username || 'admin', modifiedOn: new Date().toISOString() };
-            res = await fetch(`${API}/api/User/${editId}`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+            const body = { organizationId: editId, organizationName: name, organizationDescription: desc, isActive: active, modifiedBy: currentUser.username || 'admin', modifiedOn: now };
+            res = await fetch(`${API}/api/Organization/${editId}`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
         } else {
-            const now = new Date().toISOString();
-            const body = { user: { username, password: document.getElementById('fPassword').value, roleId, isActive, createdBy: currentUser.username || 'admin', createdOn: now }, organizationId: orgId };
-            res = await fetch(`${API}/api/User`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+            const body = { organizationName: name, organizationDescription: desc, isActive: active, createdBy: currentUser.username || 'admin', createdOn: now };
+            res = await fetch(`${API}/api/Organization`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
         }
         if (!res.ok) { showFormError(await res.text()); return; }
-        bootstrap.Modal.getInstance(document.getElementById('userModal')).hide();
-        await loadUsers();
-        showToast(isEdit ? 'User updated successfully.' : 'User added successfully.', 'success');
+        bootstrap.Modal.getInstance(document.getElementById('orgModal')).hide();
+        await loadOrganizations();
+        showToast(isEdit ? 'Organization updated successfully.' : 'Organization added successfully.', 'success');
     } catch (err) {
         showFormError('Network error: ' + err.message);
     } finally {
@@ -402,20 +331,20 @@ async function saveUser() {
     }
 }
 
-function openDeleteModal(userId, username) {
-    deleteTargetId = userId;
-    document.getElementById('deleteUserName').textContent = username;
+function openDeleteModal(orgId, name) {
+    deleteTargetId = orgId;
+    document.getElementById('deleteOrgName').textContent = name;
     new bootstrap.Modal(document.getElementById('deleteModal')).show();
 }
 
 async function confirmDelete() {
     document.getElementById('btnConfirmDelete').disabled = true;
     try {
-        const res = await fetch(`${API}/api/User/${deleteTargetId}`, { method: 'DELETE' });
+        const res = await fetch(`${API}/api/Organization/${deleteTargetId}`, { method: 'DELETE' });
         if (!res.ok) throw new Error(await res.text());
         bootstrap.Modal.getInstance(document.getElementById('deleteModal')).hide();
-        await loadUsers();
-        showToast('User deleted successfully.', 'danger');
+        await loadOrganizations();
+        showToast('Organization deleted successfully.', 'danger');
     } catch (err) {
         alert('Error: ' + err.message);
     } finally {
@@ -425,8 +354,7 @@ async function confirmDelete() {
 
 function showFormError(msg) {
     const d = document.getElementById('formError');
-    d.textContent = msg;
-    d.classList.remove('d-none');
+    d.textContent = msg; d.classList.remove('d-none');
 }
 function setSaving(on) {
     document.getElementById('btnSave').disabled = on;
@@ -434,14 +362,13 @@ function setSaving(on) {
     document.getElementById('btnSaveSpinner').classList.toggle('d-none', !on);
 }
 function showTableError(msg) {
-    document.getElementById('userTableBody').innerHTML =
-        `<tr><td colspan="7" class="text-center text-danger py-4"><i class="bx bx-error me-1"></i>${msg}</td></tr>`;
+    document.getElementById('orgTableBody').innerHTML =
+        `<tr><td colspan="6" class="text-center text-danger py-4"><i class="bx bx-error me-1"></i>${msg}</td></tr>`;
 }
 function showToast(msg, type) {
     const t = document.createElement('div');
     t.className = `alert alert-${type} position-fixed bottom-0 end-0 m-3 shadow`;
-    t.style.zIndex = 9999;
-    t.textContent = msg;
+    t.style.zIndex = 9999; t.textContent = msg;
     document.body.appendChild(t);
     setTimeout(() => t.remove(), 3000);
 }

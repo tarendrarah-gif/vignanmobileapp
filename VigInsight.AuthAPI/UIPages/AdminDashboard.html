@@ -73,21 +73,21 @@
                         </a>
                     </li>
                     <li class="menu-item">
-                        <a href="AddUser.html" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-user-plus"></i>
-                            <div data-i18n="Analytics">Add User</div>
+                        <a href="UserList.html" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-group"></i>
+                            <div>Users</div>
                         </a>
                     </li>
                     <li class="menu-item">
-                        <a href="AddMachine.html" class="menu-link">
+                        <a href="MachineList.html" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-chip"></i>
-                            <div data-i18n="Analytics">Add Machine</div>
+                            <div>Machines</div>
                         </a>
                     </li>
                     <li class="menu-item">
-                        <a href="AddOrganization.html" class="menu-link">
+                        <a href="OrganizationList.html" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-buildings"></i>
-                            <div data-i18n="Analytics">Add Organization</div>
+                            <div>Organizations</div>
                         </a>
                     </li>
 
@@ -149,8 +149,8 @@
                                                     </div>
                                                 </div>
                                                 <div class="flex-grow-1">
-                                                    <span class="fw-semibold d-block">John Doe</span>
-                                                    <small class="text-muted">Admin</small>
+                                                    <span class="fw-semibold d-block navbar-username">Admin</span>
+                                                    <small class="text-muted navbar-role">Admin</small>
                                                 </div>
                                             </div>
                                         </a>
@@ -171,19 +171,10 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="#">
-                                            <span class="d-flex align-items-center align-middle">
-                                                <i class="flex-shrink-0 bx bx-credit-card me-2"></i>
-                                                <span class="flex-grow-1 align-middle">Billing</span>
-                                                <span class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li>
                                         <div class="dropdown-divider"></div>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="index.html">
+                                        <a class="dropdown-item" href="index.html" onclick="localStorage.removeItem('user')">
                                             <i class="bx bx-power-off me-2"></i>
                                             <span class="align-middle">Log Out</span>
                                         </a>
@@ -205,17 +196,17 @@
                                 <div class="row">
 
                                     <div class="col-lg-6 col-md-12 col-6 mb-4">
-                                        <a href="AddUser.html" style="text-decoration:none;">
+                                        <a href="UserList.html" style="text-decoration:none;">
                                             <div class="card card-hover-effect" style="cursor:pointer;">
                                                 <div class="card-body">
                                                     <div class="card-title d-flex align-items-start justify-content-between">
                                                         <div class="avatar flex-shrink-0">
                                                             <span class="avatar-initial rounded bg-label-primary">
-                                                                <i class="bx bx-user-plus" style="font-size: 1.5rem;"></i>
+                                                                <i class="bx bx-group" style="font-size: 1.5rem;"></i>
                                                             </span>
                                                         </div>
                                                     </div>
-                                                    <span class="fw-semibold d-block mb-1">Add User</span>
+                                                    <span class="fw-semibold d-block mb-1">Users</span>
                                                     <h3 class="card-title mb-2" id="userCount">0</h3>
                                                     <script>
                                                     document.addEventListener('DOMContentLoaded', async function() {
@@ -235,7 +226,7 @@
                                     </div>
 
                                     <div class="col-lg-6 col-md-12 col-6 mb-4">
-                                        <a href="AddMachine.html" style="text-decoration:none;">
+                                        <a href="MachineList.html" style="text-decoration:none;">
                                             <div class="card card-hover-effect" style="cursor:pointer;">
                                                 <div class="card-body">
                                                     <div class="card-title d-flex align-items-start justify-content-between">
@@ -245,15 +236,27 @@
                                                             </span>
                                                         </div>
                                                     </div>
-                                                    <span class="fw-semibold d-block mb-1">Add Machine</span>
-                                                    <h3 class="card-title text-nowrap mb-1">23</h3>
+                                                    <span class="fw-semibold d-block mb-1">Machines</span>
+                                                    <h3 class="card-title text-nowrap mb-1" id="machineCount">0</h3>
+                                                    <script>
+                                                    document.addEventListener('DOMContentLoaded', async function() {
+                                                        try {
+                                                            const response = await fetch('https://localhost:7039/api/Machine');
+                                                            if (!response.ok) throw new Error();
+                                                            const machines = await response.json();
+                                                            document.getElementById('machineCount').textContent = machines.length;
+                                                        } catch {
+                                                            document.getElementById('machineCount').textContent = '?';
+                                                        }
+                                                    });
+                                                    </script>
                                                 </div>
                                             </div>
                                         </a>
                                     </div>
 
                                     <div class="col-lg-6 col-md-12 col-6 mb-4">
-                                        <a href="AddOrganization.html" style="text-decoration:none;">
+                                        <a href="OrganizationList.html" style="text-decoration:none;">
                                             <div class="card card-hover-effect" style="cursor:pointer;">
                                                 <div class="card-body">
                                                     <div class="card-title d-flex align-items-start justify-content-between">
@@ -263,8 +266,20 @@
                                                             </span>
                                                         </div>
                                                     </div>
-                                                    <span class="fw-semibold d-block mb-1">Add Organization</span>
-                                                    <h3 class="card-title text-nowrap mb-1">2</h3>
+                                                    <span class="fw-semibold d-block mb-1">Organizations</span>
+                                                    <h3 class="card-title text-nowrap mb-1" id="orgCount">0</h3>
+                                                    <script>
+                                                    document.addEventListener('DOMContentLoaded', async function() {
+                                                        try {
+                                                            const response = await fetch('https://localhost:7039/api/Organization');
+                                                            if (!response.ok) throw new Error();
+                                                            const orgs = await response.json();
+                                                            document.getElementById('orgCount').textContent = orgs.length;
+                                                        } catch {
+                                                            document.getElementById('orgCount').textContent = '?';
+                                                        }
+                                                    });
+                                                    </script>
                                                 </div>
                                             </div>
                                         </a>
@@ -324,6 +339,27 @@
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <script>
+    // ── Auth guard ───────────────────────────────────────────────────────────────
+    (function () {
+        const user = JSON.parse(localStorage.getItem('user') || 'null');
+        if (!user) { window.location.href = 'index.html'; return; }
+        const role = (user.role || user.roleName || '').toLowerCase();
+        if (role !== 'admin') { window.location.href = 'ClientDashboard.html'; }
+    })();
+
+    // ── Populate navbar user info from localStorage ──────────────────────────────
+    document.addEventListener('DOMContentLoaded', function () {
+        const user = JSON.parse(localStorage.getItem('user') || '{}');
+        const displayName = user.username || 'Admin';
+        const displayRole = user.role || user.roleName || 'Admin';
+
+        // Update all name/role placeholders in the navbar dropdown
+        document.querySelectorAll('.navbar-username').forEach(el => el.textContent = displayName);
+        document.querySelectorAll('.navbar-role').forEach(el => el.textContent = displayRole);
+    });
+    </script>
+
     <style>
     .card-hover-effect:hover {
         box-shadow: 0 0 0 4px #696cff33, 0 2px 4px 0 #696cff33;

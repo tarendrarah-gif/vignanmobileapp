@@ -61,8 +61,6 @@ builder.Services.AddScoped<IUserOrganizationService, UserOrganizationService>();
 builder.Services.AddScoped<IMachineOrganizationRepository, MachineOrganizationRepository>();
 builder.Services.AddScoped<IMachineOrganizationService, MachineOrganizationService>();
 builder.Services.AddScoped<IPageDataService, PageDataRepository>();
-
-// Roles DI
 builder.Services.AddScoped<IRoleRepository, RoleRepository>();
 builder.Services.AddScoped<IRoleService, RoleService>();
 

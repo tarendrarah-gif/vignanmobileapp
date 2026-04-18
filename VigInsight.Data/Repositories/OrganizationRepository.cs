@@ -17,35 +17,50 @@ namespace VigInsight.Data.Repositories
             _connStr = configuration.GetConnectionString("DefaultConnection");
         }
 
-        public async Task<int> InsertOrganizationAsync(OrganizationModel organization)
-        {
-            using var conn = new SqlConnection(_connStr);
-            var parameters = new
-            {
-                OrganizationName = organization.OrganizationName,
-                OrganizationDescription = organization.OrganizationDescription,
-                IsActive = organization.IsActive,
-                CreatedBy = organization.CreatedBy,
-                CreatedOn = organization.CreatedOn,
-                ModifiedBy = organization.ModifiedBy,
-                ModifiedOn = organization.ModifiedOn
-            };
-            var orgId = await conn.ExecuteScalarAsync<int>(
-                "usp_InsertOrganization",
-                parameters,
-                commandType: System.Data.CommandType.StoredProcedure
-            );
-            return orgId;
-        }
-
         public async Task<IEnumerable<OrganizationModel>> GetAllOrganizationsAsync()
         {
             using var conn = new SqlConnection(_connStr);
-            var orgs = await conn.QueryAsync<OrganizationModel>(
+            return await conn.QueryAsync<OrganizationModel>(
                 "usp_GetAllOrganizations",
-                commandType: System.Data.CommandType.StoredProcedure
-            );
-            return orgs;
+                commandType: System.Data.CommandType.StoredProcedure);
+        }
+
+        public async Task<OrganizationModel?> GetOrganizationByIdAsync(int organizationId)
+        {
+            using var conn = new SqlConnection(_connStr);
+            return await conn.QueryFirstOrDefaultAsync<OrganizationModel>(
+                "usp_GetOrganizationById",
+                new { OrganizationId = organizationId },
+                commandType: System.Data.CommandType.StoredProcedure);
+        }
+
+        public async Task<int> InsertOrganizationAsync(OrganizationModel organization)
+        {
+            using var conn = new SqlConnection(_connStr);
+            return await conn.ExecuteScalarAsync<int>(
+                "usp_InsertOrganization",
+                new { organization.OrganizationName, organization.OrganizationDescription, organization.IsActive, organization.CreatedBy, organization.CreatedOn, organization.ModifiedBy, organization.ModifiedOn },
+                commandType: System.Data.CommandType.StoredProcedure);
+        }
+
+        public async Task<bool> UpdateOrganizationAsync(OrganizationModel organization)
+        {
+            using var conn = new SqlConnection(_connStr);
+            var rows = await conn.ExecuteScalarAsync<int>(
+                "usp_UpdateOrganization",
+                new { organization.OrganizationId, organization.OrganizationName, organization.OrganizationDescription, organization.IsActive, organization.ModifiedBy, organization.ModifiedOn },
+                commandType: System.Data.CommandType.StoredProcedure);
+            return rows > 0;
+        }
+
+        public async Task<bool> DeleteOrganizationAsync(int organizationId)
+        {
+            using var conn = new SqlConnection(_connStr);
+            var rows = await conn.ExecuteScalarAsync<int>(
+                "usp_DeleteOrganization",
+                new { OrganizationId = organizationId },
+                commandType: System.Data.CommandType.StoredProcedure);
+            return rows >= 0;
         }
     }
 }

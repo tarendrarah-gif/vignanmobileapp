@@ -136,7 +136,9 @@
                     } else {
                         localStorage.removeItem('rememberedCreds');
                     }
-                    if (data.role && data.role.toLowerCase() === 'admin') {
+                    // Normalise role — API returns both "role" and "roleName"
+                    const userRole = (data.role || data.roleName || '').toLowerCase();
+                    if (userRole === 'admin') {
                         window.location.href = 'AdminDashboard.html';
                     } else {
                         window.location.href = 'ClientDashboard.html';

@@ -12,6 +12,10 @@ namespace VigInsight.Core.Models
 
         public int RoleId { get; set; }
 
+        /// <summary>Flat string mapped directly from Dapper (stored proc JOIN on tblRoleMaster).</summary>
+        public string? RoleName { get; set; }
+
+        /// <summary>Navigation – only populated when explicitly mapped (not used in Dapper flat queries).</summary>
         public RoleModel? Role { get; set; } // navigation (optional in Dapper mapping)
 
         public bool IsActive { get; set; }

@@ -45,11 +45,13 @@ namespace VigInsight.AuthAPI.Controllers
                 // Return all user details needed by frontend
                 return Ok(new
                 {
-                    Token = token,
+                    Token    = token,
                     Username = validUser.Username,
-                    Role = validUser.Role,
-                    UserId = validUser.UserId,
-                    OrganizationId = validUser.OrganizationId,
+                    Role     = validUser.RoleName,   // flat string e.g. "Admin", "Client", "User"
+                    RoleName = validUser.RoleName,   // duplicate for JS pages that read roleName
+                    UserId       = validUser.UserId,
+                    RoleId       = validUser.RoleId,
+                    OrganizationId   = validUser.OrganizationId,
                     OrganizationName = validUser.OrganizationName
                 });
             }
